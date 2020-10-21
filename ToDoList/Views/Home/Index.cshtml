@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ToDo>
+
+<div class="row">
+    <div class="col-sm-2">
+        <form asp-action="Filter" method="post">
+            <div class="form-group">
+                <label>Name:</label>
+                <select name="filter" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.Statuses, "StatusId", "StatusName", ViewBag.Filters.StatusId))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+            <br />
+            <br />
+            <a asp-action="Index" asp-route-id="" class="btn btn-primary">Clear</a>
+        </form>
+    </div>
+    <div class="col-sm-2">
+
+        <a asp-action="Add"><b>Add new ticket</b></a>
+
+        <table class="table table-bordered table-striped mt-2">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Sprint Number</th>
+                    <th>Point Value</th>
+                    <th>Status</th>
+                    <th class="w-25"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ToDo ticket in Model)
+                {
+                    <tr>
+                        <td>@ticket.Name</td>
+                        <td>@ticket.Description</td>
+                        <td>@ticket.SprintNumber</td>
+                        <td>@ticket.PointValue</td>
+                        <td>@ticket.StatusName</td>
+                        <td>
+                            <form asp-action="Edit" method="post" asp-route-id="@ViewBag.Filters.FilterString" class="mr-2">
+
+                                <input type="hidden" name="@nameof(ToDo.Id)" value="@ticket.Id" />
+
+                                <button type="submit" name="@nameof(ToDo.StatusId)" value="closed" class="btn btn-primary btn-sm">
+                                    Completed
+                                </button>
+
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
