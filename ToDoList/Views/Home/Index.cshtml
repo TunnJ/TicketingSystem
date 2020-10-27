@@ -18,6 +18,8 @@
     </div>
     <div class="col-sm-2">
 
+        <div asp-validation-summary="All" class="text-danger"></div>
+
         <a asp-action="Add"><b>Add new ticket</b></a>
 
         <table class="table table-bordered table-striped mt-2">
@@ -39,7 +41,7 @@
                         <td>@ticket.Description</td>
                         <td>@ticket.SprintNumber</td>
                         <td>@ticket.PointValue</td>
-                        <td>@ticket.StatusName</td>
+                        <td>@ticket.StatusId</td>
                         <td>
                             <form asp-action="Edit" method="post" asp-route-id="@ViewBag.Filters.FilterString" class="mr-2">
 

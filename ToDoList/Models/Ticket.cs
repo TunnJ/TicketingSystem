@@ -14,6 +14,7 @@ namespace ToDoList.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Please enter a name")]
+        [StringLength(20)]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Please enter a description")]
@@ -23,6 +24,7 @@ namespace ToDoList.Models
         public string SprintNumber { get; set; }
 
         [Required(ErrorMessage = "Please enter a point value")]
+        [Range(1,5)]
         public string PointValue { get; set; }
 
         [Required(ErrorMessage = "Please enter a status")]
