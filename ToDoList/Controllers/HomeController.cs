@@ -12,6 +12,8 @@ namespace ToDoList.Controllers
 {
     public class HomeController : Controller
     {
+        //Constructor injection
+        //This controller receives a DbContext object from dependcy injection
         private ToDoContext context;
         public HomeController(ToDoContext ctx) => context = ctx;
 
